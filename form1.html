@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Form 1</title>
+        <style href="css/style.css"></style>
+    </head>
+    <body>
+        <div id="teste1">
+            <form>
+                Digite seu nome:
+                <input
+                    type="text"
+                    name="nome"
+                    id="nome"
+                    maxlength="20"
+                    size="20"
+                    value="Seu nome aqui"
+                />
+                <br />
+                <input type="submit" value="Enviar" />
+            </form>
+        </div>
+
+        <div id="teste2">
+            <form>
+                Qual seu estado?
+                <br />
+                <select name="estado" id="estado" size="1">
+                    <option value="SP">São Paulo</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                </select>
+                <input type="submit" value="Enviar" />
+            </form>
+        </div>
+
+        <div id="teste3">
+            <h1>Form 1</h1>
+            <form>
+                <h1>O que você achou da professora Adriana?</h1>
+                <input
+                    type="radio"
+                    name="avaliacao"
+                    value="muitobom"
+                    checked
+                />Muito bom
+                <input type="radio" name="avaliacao" value="bom" checked />Bom
+                <input
+                    type="radio"
+                    name="avaliacao"
+                    value="regular"
+                    checked
+                />Regular
+                <input type="radio" name="avaliacao" value="ruim" checked />Ruim
+
+                <h1>Qual a seção que você mais gostou?</h1>
+                <select name="secao" size="1">
+                    <option value="aulas">Aulas</option>
+                    <option value="Portifólio">Portifólio</option>
+                    <option value="Contato">Contato</option>
+                </select>
+
+                <h1>Digite seus comentários no espaço abaixo:</h1>
+                <textarea name="comentarios" rows="5" cols="42"> </textarea>
+
+                <h1>Diga-me como entrar em contato com você:</h1>
+                Nome <input type="text" size="35" maxlength="256" name="nome" />
+                <br />
+                Email
+                <input type="text" size="35" maxlength="256" name="email" />
+                <br />
+                Fone <input type="text" size="35" maxlength="256" name="fone" />
+                <br />
+
+                <input type="checkbox" name="novidades" value="nov" />
+                Quero receber as novidades do site por e-mail.
+
+                <input type="submit" value="Enviar Dados" />
+                <input type="reset" value="Limpar Formulário" />
+            </form>
+        </div>
+    </body>
+</html>

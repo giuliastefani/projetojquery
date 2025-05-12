@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Canvas 2</title>
+
+        <style>
+            .content {
+                font-family: Arial, sans-serif;
+                background-color: white;
+                border-radius: 10px;
+                padding: 25px;
+                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+                width: 90%;
+                max-width: 500px;
+                text-align: center;
+            }
+
+            canvas {
+                border: 2px solid #ddd;
+                margin: 20px auto;
+                display: block;
+                background-color: white;
+            }
+
+            .options {
+                margin: 20px 0;
+                text-align: center;
+            }
+
+            .option {
+                margin: 15px 0;
+                padding: 10px;
+                background-color: #f8f8f8;
+                border-radius: 5px;
+            }
+
+            .option:hover {
+                background-color: #e9e9e9;
+            }
+
+            button {
+                background-color: lightpink;
+                color: white;
+                border: none;
+                padding: 12px 25px;
+                border-radius: 5px;
+                font-size: 16px;
+                margin: 15px 0;
+            }
+
+            button:hover {
+                background-color: rgb(255, 221, 217);
+            }
+
+            .result {
+                font-size: 18px;
+                font-weight: bold;
+                min-height: 27px;
+                margin: 15px 0;
+            }
+        </style>
+
+        <script>
+            {
+                const canvas = document.getElementById("canvas");
+                const x = canvas.getContext("2d");
+
+                function jogar() {
+                    const selectedCountry = document.querySelector(
+                        'input[name="country"]:checked'
+                    ).value;
+
+                    const countries = ["brasil", "argentina", "franca"];
+                    const drawnCountry =
+                        countries[Math.floor(Math.random() * countries.length)];
+                    x.clearRect(0, 0, canvas.width, canvas.height);
+                    drawFlag(drawnCountry);
+
+                    setTimeout(() => {
+                        if (selectedCountry === drawnCountry) {
+                            alert("Parabéns!");
+                        } else {
+                            alert("Tente novamente!");
+                        }
+                    }, 500);
+                }
+
+                function drawFlag(country) {
+                    switch (country) {
+                        case "brasil":
+                            drawBrazilFlag();
+                            break;
+                        case "argentina":
+                            drawArgentinaFlag();
+                            break;
+                        case "franca":
+                            drawFranceFlag();
+                            break;
+                    }
+                }
+
+                function drawBrazilFlag() {
+                    x.fillStyle = "#009B3A";
+                    x.fillRect(0, 0, canvas.width, canvas.height);
+
+                    x.fillStyle = "#FEDF00";
+                    x.beginPath();
+                    x.moveTo(canvas.width / 2, 30);
+                    x.lineTo(30, canvas.height / 2);
+                    x.lineTo(canvas.width / 2, canvas.height - 30);
+                    x.lineTo(canvas.width - 30, canvas.height / 2);
+                    x.closePath();
+                    x.fill();
+
+                    x.fillStyle = "#002776";
+                    x.beginPath();
+                    x.arc(canvas.width / 2, canvas.height / 2, 60, 0, 3.14 * 2);
+                    x.fill();
+                }
+
+                function drawArgentinaFlag() {
+                    const stripeHeight = canvas.height / 3;
+
+                    x.fillStyle = "#75AADB";
+                    x.fillRect(0, 0, canvas.width, stripeHeight);
+
+                    x.fillStyle = "#FFFFFF";
+                    x.fillRect(0, stripeHeight, canvas.width, stripeHeight);
+
+                    x.fillStyle = "#75AADB";
+                    x.fillRect(0, stripeHeight * 2, canvas.width, stripeHeight);
+
+                    x.fillStyle = "#F6B40E";
+                    x.beginPath();
+                    x.arc(canvas.width / 2, canvas.height / 2, 30, 0, 3.14 * 2);
+                    x.fill();
+                }
+
+                function drawFranceFlag() {
+                    const stripeWidth = canvas.width / 3;
+
+                    x.fillStyle = "#0055A4";
+                    x.fillRect(0, 0, stripeWidth, canvas.height);
+
+                    x.fillStyle = "#FFFFFF";
+                    x.fillRect(stripeWidth, 0, stripeWidth, canvas.height);
+
+                    x.fillStyle = "#EF4135";
+                    x.fillRect(stripeWidth * 2, 0, stripeWidth, canvas.height);
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="content">
+            <p>Qual país será sorteado?</p>
+
+            <div class="options">
+                <label class="option">
+                    <input type="radio" name="country" value="brasil" checked />
+                    Brasil
+                </label>
+                <label class="option">
+                    <input type="radio" name="country" value="argentina" />
+                    Argentina
+                </label>
+                <label class="option">
+                    <input type="radio" name="country" value="franca" />
+                    França
+                </label>
+            </div>
+
+            <button id="play" onclick="jogar()">Sortear</button>
+            <canvas id="canvas" width="400" height="250"></canvas>
+        </div>
+    </body>
+</html>

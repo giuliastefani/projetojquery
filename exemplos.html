@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <center>
+            FAÇA SUA APOSTA: <br /><br />
+            <form>
+                <select name="aposta" id="aposta">
+                    <option value="1">Circulo</option>
+                    <option value="2">Quadrado</option>
+                    <option value="3">Retangulo</option>
+                </select>
+            </form>
+            <br />
+
+            <button onclick="desenhar()">Desenhar</button>
+            <br /><br />
+
+            <canvas
+                id="x"
+                width="300"
+                height="300"
+                style="border: 1px solid #b72c6d"
+            ></canvas>
+        </center>
+        <script>
+            function desenhar() {
+                aposta = document.getElementById("aposta");
+                aposta = Number(aposta.value);
+                alert("Você apostou em:" + aposta);
+                sorteio = Math.floor(Math.random() * (4 - 1) + 1);
+                x = document.getElementById("x").getContext("2d");
+
+                x.clearRect(0, 0, 300, 300);
+                x.beginPath();
+
+                if (sorteio == 1) {
+                    x.fillStyle = "#cc0088";
+                    x.strokeStyle = "#cc1";
+                    x.arc(100, 75, 50, 0, 2 * 3.14);
+                    x.fill();
+                    x.stroke();
+                } else if (sorteio == 2) {
+                    x.fillStyle = "rgb(255,0,0)";
+                    x.fillRect(10, 10, 150, 50);
+                } else {
+                    x.fillStyle = "rgb(255,0,0)";
+                    x.fillRect(10, 10, 50, 50);
+                }
+
+                setTimeout(() => {
+                    if (aposta == sorteio) alert("Parabéns!");
+                    else alert("Tente novamente!");
+                }, 500);
+            }
+        </script>
+    </body>
+</html>
