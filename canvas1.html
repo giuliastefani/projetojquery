@@ -1,106 +1,62 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Canvas 1</title>
+        <title>Document</title>
+    </head>
+    <body>
+        <center>
+            FAÇA SUA APOSTA: <br /><br />
+            <form>
+                <select name="aposta" id="aposta">
+                    <option value="1">Circulo</option>
+                    <option value="2">Quadrado</option>
+                    <option value="3">Retangulo</option>
+                </select>
+            </form>
+            <br />
 
-        <style>
-            .content {
-                font-family: Arial, sans-serif;
-                background-color: white;
-                border-radius: 10px;
-                padding: 25px;
-                box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-                width: 90%;
-                max-width: 700px;
-                text-align: center;
-            }
+            <button onclick="desenhar()">Desenhar</button>
+            <br /><br />
 
-            canvas {
-                border: 2px solid #ddd;
-                margin: 20px auto;
-                display: block;
-                background-color: white;
-            }
-
-            .buttons {
-                margin: 20px 0;
-                text-align: center;
-            }
-
-            button {
-                background-color: lightpink;
-                color: white;
-                border: none;
-                padding: 12px 25px;
-                border-radius: 5px;
-                font-size: 16px;
-                margin: 15px 0;
-            }
-
-            button:hover {
-                background-color: rgb(255, 221, 217);
-            }
-        </style>
+            <canvas
+                id="x"
+                width="300"
+                height="300"
+                style="border: 1px solid #b72c6d"
+            ></canvas>
+        </center>
         <script>
-            const canvas = document.getElementById("flag");
-            const x = canvas.getContext("2d");
+            function desenhar() {
+                aposta = document.getElementById("aposta");
+                aposta = Number(aposta.value);
+                alert("Você apostou em:" + aposta);
+                sorteio = Math.floor(Math.random() * (4 - 1) + 1);
+                x = document.getElementById("x").getContext("2d");
 
-            function drawFlag() {
-                x.clearRect(0, 0, canvas.width, canvas.height);
-
-                //retângulo
-                x.fillStyle = "#009B3A";
-                x.fillRect(0, 0, canvas.width, canvas.height);
-
-                //losango
-                x.fillStyle = "#FEDF00";
+                x.clearRect(0, 0, 300, 300);
                 x.beginPath();
-                x.moveTo(canvas.width / 2, 50);
-                x.lineTo(50, canvas.height / 2);
-                x.lineTo(canvas.width / 2, canvas.height - 50);
-                x.lineTo(canvas.width - 50, canvas.height / 2);
-                x.closePath();
-                x.fill();
 
-                //círculo
-                x.fillStyle = "#002776";
-                x.beginPath();
-                x.arc(canvas.width / 2, canvas.height / 2, 100, 0, 3.14 * 2);
-                x.fill();
+                if (sorteio == 1) {
+                    x.fillStyle = "#cc0088";
+                    x.strokeStyle = "#cc1";
+                    x.arc(100, 75, 50, 0, 2 * 3.14);
+                    x.fill();
+                    x.stroke();
+                } else if (sorteio == 2) {
+                    x.fillStyle = "rgb(255,0,0)";
+                    x.fillRect(10, 10, 150, 50);
+                } else {
+                    x.fillStyle = "rgb(255,0,0)";
+                    x.fillRect(10, 10, 50, 50);
+                }
 
-                //estrela
-                x.fillStyle = "#FFFFFF";
-                x.beginPath();
-                x.moveTo(300, 150);
-                x.lineTo(290, 180);
-                x.lineTo(260, 180);
-                x.lineTo(280, 200);
-                x.lineTo(270, 230);
-                x.lineTo(300, 210);
-                x.lineTo(330, 230);
-                x.lineTo(320, 200);
-                x.lineTo(340, 180);
-                x.lineTo(310, 180);
-                x.fill();
-            }
-
-            function clearCanvas() {
-                x.clearRect(0, 0, canvas.width, canvas.height);
+                setTimeout(() => {
+                    if (aposta == sorteio) alert("Parabéns!");
+                    else alert("Tente novamente!");
+                }, 500);
             }
         </script>
-    </head>
-
-    <body>
-        <div class="content">
-            <canvas id="flag" width="600" height="420"></canvas>
-            <div class="buttons">
-                <button id="drawBtn" onclick="drawFlag()">
-                    Desenhar Bandeira
-                </button>
-                <button id="clearBtn" onclick="clearCanvas()">Limpar</button>
-            </div>
-        </div>
     </body>
 </html>
