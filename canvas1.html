@@ -24,7 +24,7 @@
                 background-color: white;
             }
 
-            .botoes {
+            .buttons {
                 margin: 20px 0;
                 text-align: center;
             }
@@ -44,10 +44,10 @@
             }
         </style>
         <script>
-            const canvas = document.getElementById("bandeira");
+            const canvas = document.getElementById("flag");
             const x = canvas.getContext("2d");
 
-            function desenharBandeira() {
+            function drawFlag() {
                 x.clearRect(0, 0, canvas.width, canvas.height);
 
                 //retângulo
@@ -86,7 +86,7 @@
                 x.fill();
             }
 
-            function limparCanvas() {
+            function clearCanvas() {
                 x.clearRect(0, 0, canvas.width, canvas.height);
             }
         </script>
@@ -94,12 +94,12 @@
 
     <body>
         <div class="content">
-            <canvas id="bandeira" width="600" height="420"></canvas>
-            <div class="botoes">
-                <button id="desenharBtn" onclick="desenharBandeira()">
+            <canvas id="flag" width="600" height="420"></canvas>
+            <div class="buttons">
+                <button id="drawBtn" onclick="drawFlag()">
                     Desenhar Bandeira
                 </button>
-                <button id="limparBtn" onclick="limparCanvas()">Limpar</button>
+                <button id="clearBtn" onclick="clearCanvas()">Limpar</button>
             </div>
         </div>
     </body>

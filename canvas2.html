@@ -25,12 +25,13 @@
             }
 
             .options {
-                margin: 20px 0;
-                text-align: center;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 25px;
+                margin: 10px 0;
             }
 
             .option {
-                margin: 15px 0;
                 padding: 10px;
                 background-color: #f8f8f8;
                 border-radius: 5px;
@@ -53,13 +54,6 @@
             button:hover {
                 background-color: rgb(255, 221, 217);
             }
-
-            .result {
-                font-size: 18px;
-                font-weight: bold;
-                min-height: 27px;
-                margin: 15px 0;
-            }
         </style>
 
         <script>
@@ -67,12 +61,19 @@
                 const canvas = document.getElementById("canvas");
                 const x = canvas.getContext("2d");
 
-                function jogar() {
+                function play() {
                     const selectedCountry = document.querySelector(
                         'input[name="country"]:checked'
                     ).value;
 
-                    const countries = ["brasil", "argentina", "franca"];
+                    const countries = [
+                        "brasil",
+                        "argentina",
+                        "franca",
+                        "japao",
+                        "italia",
+                        "alemanha",
+                    ];
                     const drawnCountry =
                         countries[Math.floor(Math.random() * countries.length)];
                     x.clearRect(0, 0, canvas.width, canvas.height);
@@ -97,6 +98,15 @@
                             break;
                         case "franca":
                             drawFranceFlag();
+                            break;
+                        case "japao":
+                            drawJapanFlag();
+                            break;
+                        case "italia":
+                            drawItalyFlag();
+                            break;
+                        case "alemanha":
+                            drawGermanyFlag();
                             break;
                     }
                 }
@@ -150,6 +160,48 @@
                     x.fillStyle = "#EF4135";
                     x.fillRect(stripeWidth * 2, 0, stripeWidth, canvas.height);
                 }
+
+                function drawJapanFlag() {
+                    x.fillStyle = "#FFFFFF";
+                    x.fillRect(0, 0, canvas.width, canvas.height);
+
+                    x.fillStyle = "#BC002D";
+                    x.beginPath();
+                    x.arc(
+                        canvas.width / 2,
+                        canvas.height / 2,
+                        60,
+                        0,
+                        Math.PI * 2
+                    );
+                    x.fill();
+                }
+
+                function drawItalyFlag() {
+                    const stripeWidth = canvas.width / 3;
+
+                    x.fillStyle = "#009246";
+                    x.fillRect(0, 0, stripeWidth, canvas.height);
+
+                    x.fillStyle = "#FFFFFF";
+                    x.fillRect(stripeWidth, 0, stripeWidth, canvas.height);
+
+                    x.fillStyle = "#CE2B37";
+                    x.fillRect(stripeWidth * 2, 0, stripeWidth, canvas.height);
+                }
+
+                function drawGermanyFlag() {
+                    const stripeHeight = canvas.height / 3;
+
+                    x.fillStyle = "#000000";
+                    x.fillRect(0, 0, canvas.width, stripeHeight);
+
+                    x.fillStyle = "#DD0000";
+                    x.fillRect(0, stripeHeight, canvas.width, stripeHeight);
+
+                    x.fillStyle = "#FFCE00";
+                    x.fillRect(0, stripeHeight * 2, canvas.width, stripeHeight);
+                }
             }
         </script>
     </head>
@@ -171,9 +223,21 @@
                     <input type="radio" name="country" value="franca" />
                     França
                 </label>
+                <label class="option">
+                    <input type="radio" name="country" value="japao" />
+                    Japão
+                </label>
+                <label class="option">
+                    <input type="radio" name="country" value="italia" />
+                    Itália
+                </label>
+                <label class="option">
+                    <input type="radio" name="country" value="alemanha" />
+                    Alemanha
+                </label>
             </div>
 
-            <button id="play" onclick="jogar()">Sortear</button>
+            <button id="play" onclick="play()">Sortear</button>
             <canvas id="canvas" width="400" height="250"></canvas>
         </div>
     </body>
